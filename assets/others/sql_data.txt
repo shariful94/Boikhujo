@@ -1,0 +1,1369 @@
+https://en.wikipedia.org/wiki/Upazila
+
+DROP SCHEMA IF EXISTS book;
+CREATE SCHEMA book;
+USE book;
+
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `full_name` varchar(255) NOT NULL,
+  `mobile` varchar(30) NOT NULL UNIQUE,
+  `password` varchar(255) NOT NULL,
+  `role` int NOT NULL DEFAULT 1,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+
+--
+-- Table structure for table `profile`
+--
+
+CREATE TABLE `profile` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `status` varchar(255) NOT NULL,
+  `image1` varchar(255) NOT NULL,
+  `image2` varchar(255) NOT NULL,
+  `lat` varchar(50) NOT NULL,
+  `lng` varchar(50) NOT NULL,
+  `aboutme` varchar(512) NOT NULL,
+  `division_id` int NOT NULL,
+  `district_id` int NOT NULL,
+  `area_id` int NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+
+--
+-- Table structure for table `usersprofile`
+--
+
+CREATE TABLE `usersprofile` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NOT NULL,
+  `division_id` INT NOT NULL,
+  `district_id` INT NOT NULL,
+  `area_id` INT NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `website` VARCHAR(100) NOT NULL,
+  `facebook` VARCHAR(100) NOT NULL,
+  `twitter` VARCHAR(100) NOT NULL,
+  `linkedin` VARCHAR(100) NOT NULL,
+  `education` VARCHAR(200) NOT NULL,
+  `job_designation` VARCHAR(200) NOT NULL,
+  `profile_image` VARCHAR(200) NOT NULL,
+  `details` VARCHAR(512) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+id
+user_id
+division_id
+district_id
+area_id
+email
+website
+facebook
+twitter
+linkedin
+education
+job_designation
+profile_image
+details
+created
+
+
+
+--
+-- Table structure for table `division`
+--
+
+CREATE TABLE `division` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `district`
+--
+
+CREATE TABLE `district` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `division_id` INT NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `area`
+--
+
+CREATE TABLE `area` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `district_id` INT NOT NULL,
+  `division_id` INT NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `author`
+--
+
+CREATE TABLE `author`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `details` varchar(1024) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `publications`
+--
+
+CREATE TABLE `publications`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `details` VARCHAR(512) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `subcategories`
+--
+
+CREATE TABLE `subcategories`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `category_id` INT NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+--
+-- Table structure for table `bookposts`
+--
+
+CREATE TABLE `bookposts` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `details` varchar(1024) NOT NULL,
+  `price1` decimal(10,2) NOT NULL,
+  `price2` decimal(10,2) NOT NULL,
+  `type` varchar(20) NOT NULL,
+  `user_id` int NOT NULL,
+  `category_id` int NOT NULL,
+  `subcategory_id` int NOT NULL,
+  `division_id` int NOT NULL,
+  `district_id` int NOT NULL,
+  `area_id` int NOT NULL,
+  `author_id` int NOT NULL,
+  `publications_id` int NOT NULL,
+  `created` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `deleted` timestamp NULL DEFAULT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+
+
+--
+-- Table structure for table `message`
+--
+
+CREATE TABLE `message`(
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `bookpost_id` INT NOT NULL,
+  `selleruser_id` INT NOT NULL,
+  `buyeruser_id` INT NOT NULL,
+  `messages` VARCHAR(512) NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+
+||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+--
+-- Relation tables
+--
+
+
+ALTER TABLE `district` ADD FOREIGN KEY (`division_id`) REFERENCES `division`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `area` ADD FOREIGN KEY (`division_id`) REFERENCES `division`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `area` ADD FOREIGN KEY (`district_id`) REFERENCES `district`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `subcategories` ADD FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+ALTER TABLE `usersprofile` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`category_id`) REFERENCES `categories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`division_id`) REFERENCES `division`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`district_id`) REFERENCES `district`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`area_id`) REFERENCES `area`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`author_id`) REFERENCES `author`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `bookposts` ADD FOREIGN KEY (`publications_id`) REFERENCES `publications`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+
+ALTER TABLE `profile` ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `profile` ADD FOREIGN KEY (`division_id`) REFERENCES `division`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `profile` ADD FOREIGN KEY (`district_id`) REFERENCES `district`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `profile` ADD FOREIGN KEY (`area_id`) REFERENCES `area`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+
+ALTER TABLE `message` ADD FOREIGN KEY (`bookpost_id`) REFERENCES `bookposts`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `message` ADD FOREIGN KEY (`selleruser_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE `message` ADD FOREIGN KEY (`buyeruser_id`) REFERENCES `users`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+
+
+|||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+--
+-- Dumping data for table division
+--
+
+INSERT INTO division (`id`, `name`, `created`) VALUES
+(NULL,'Dhaka',NULL),
+(NULL,'Chittagong',NULL),
+(NULL,'Barisal',NULL),
+(NULL,'Khulna',NULL),
+(NULL,'Rajshahi',NULL),
+(NULL,'Sylhet',NULL),
+(NULL,'Rangpur',NULL),
+(NULL,'Mymensingh',NULL);
+
+
+--
+-- Dumping data for table district
+--
+
+INSERT INTO district (`id`, `name`, `division_id`, `created`) VALUES
+(NULL, 'Dhaka', '1', NULL),
+(NULL, 'Gazipur', '1', NULL),
+(NULL, 'Gopalganj', '1', NULL),
+(NULL, 'Kishoreganj', '1', NULL),
+(NULL, 'Madaripur', '1', NULL),
+(NULL, 'Manikganj', '1', NULL),
+(NULL, 'Munshiganj', '1', NULL),
+(NULL, 'Narayanganj', '1', NULL),
+(NULL, 'Rajbari', '1', NULL),
+(NULL, 'Shariatpur', '1', NULL),
+(NULL, 'Faridpur', '1', NULL),
+(NULL, 'Tangail', '1', NULL),
+(NULL, 'Narsingdi', '1', NULL),
+(NULL, 'Bandarban', '2', NULL),
+(NULL, 'Brahmanbaria', '2', NULL),
+(NULL, 'Chandpur', '2', NULL),
+(NULL, 'Chittagong', '2', NULL),
+(NULL, 'Comilla', '2', NULL),
+(NULL, 'Cox\'s Bazar', '2', NULL),
+(NULL, 'Feni', '2', NULL),
+(NULL, 'Khagrachhari', '2', NULL),
+(NULL, 'Lakshmipur', '2', NULL),
+(NULL, 'Noakhali', '2', NULL),
+(NULL, 'Rangamati', '2', NULL),
+(NULL, 'Barguna', '3', NULL),
+(NULL, 'Barisal', '3', NULL),
+(NULL, 'Bhola', '3', NULL),
+(NULL, 'Jhalokati', '3', NULL),
+(NULL, 'Patuakhali', '3', NULL),
+(NULL, 'Pirojpur', '3', NULL),
+(NULL, 'Bagerhat', '4', NULL),
+(NULL, 'Chuadanga', '4', NULL),
+(NULL, 'Jessore', '4', NULL),
+(NULL, 'Jhenaidah', '4', NULL),
+(NULL, 'Khulna', '4', NULL),
+(NULL, 'Kushtia', '4', NULL),
+(NULL, 'Magura', '4', NULL),
+(NULL, 'Meherpur', '4', NULL),
+(NULL, 'Narail', '4', NULL),
+(NULL, 'Satkhira', '4', NULL),
+(NULL, 'Bogra', '5', NULL),
+(NULL, 'Joypurhat', '5', NULL),
+(NULL, 'Naogaon', '5', NULL),
+(NULL, 'Natore', '5', NULL),
+(NULL, 'Chapai Nawabganj', '5', NULL),
+(NULL, 'Pabna', '5', NULL),
+(NULL, 'Rajshahi', '5', NULL),
+(NULL, 'Sirajganj', '5', NULL),
+(NULL, 'Habiganj', '6', NULL),
+(NULL, 'Moulvibazar', '6', NULL),
+(NULL, 'Sunamganj', '6', NULL),
+(NULL, 'Sylhet', '6', NULL),
+(NULL, 'Dinajpur', '7', NULL),
+(NULL, 'Gaibandha', '7', NULL),
+(NULL, 'Kurigram', '7', NULL),
+(NULL, 'Lalmonirhat', '7', NULL),
+(NULL, 'Nilphamari', '7', NULL),
+(NULL, 'Panchagarh', '7', NULL),
+(NULL, 'Rangpur', '7', NULL),
+(NULL, 'Thakurgaon', '7', NULL),
+(NULL, 'Jamalpur', '8', NULL),
+(NULL, 'Mymensingh', '8', NULL),
+(NULL, 'Netrokona', '8', NULL),
+(NULL, 'Sherpur', '8', NULL);
+
+
+
+
+
+--
+-- Dumping data for table area
+--
+
+INSERT INTO `area` (`id`, `name`, `district_id`, `division_id`, `created`) VALUES
+(NULL, 'Dhamrai', '1', '1', NULL),
+(NULL, 'Dohar', '1', '1', NULL),
+(NULL, 'Keraniganj', '1', '1', NULL),
+(NULL, 'Nawabganj', '1', '1', NULL),
+(NULL, 'Savar', '1', '1', NULL),
+(NULL, 'Ramna', '1', '1', NULL),
+(NULL, 'Motijheel', '1', '1', NULL),
+(NULL, 'Kotwali', '1', '1', NULL),
+(NULL, 'Dhanmondi', '1', '1', NULL),
+(NULL, 'Mohammadpur', '1', '1', NULL),
+(NULL, 'Sutrapur', '1', '1', NULL),
+(NULL, 'Tejgaon', '1', '1', NULL),
+(NULL, 'Gulshan', '1', '1', NULL),
+(NULL, 'Lalbagh', '1', '1', NULL),
+(NULL, 'Mirpur', '1', '1', NULL),
+(NULL, 'Pallabi', '1', '1', NULL),
+(NULL, 'Sabujbag', '1', '1', NULL),
+(NULL, 'Cantonment', '1', '1', NULL),
+(NULL, 'Demra', '1', '1', NULL),
+(NULL, 'Hazaribagh', '1', '1', NULL),
+(NULL, 'Shyampur', '1', '1', NULL),
+(NULL, 'Badda', '1', '1', NULL),
+(NULL, 'Kafrul', '1', '1', NULL),
+(NULL, 'Kamringirchar', '1', '1', NULL),
+(NULL, 'Khilgaon', '1', '1', NULL),
+(NULL, 'Uttara', '1', '1', NULL),
+(NULL, 'Shah Ali', '1', '1', NULL),
+(NULL, 'Biman Bandar', '1', '1', NULL),
+(NULL, 'Paltan', '1', '1', NULL),
+(NULL, 'Adabar', '1', '1', NULL),
+(NULL, 'Darus Salam', '1', '1', NULL),
+(NULL, 'Uttarkhan', '1', '1', NULL),
+(NULL, 'Kadamtoli', '1', '1', NULL),
+(NULL, 'Gendaria', '1', '1', NULL),
+(NULL, 'Chalkbazar', '1', '1', NULL),
+(NULL, 'Tejgaon', '1', '1', NULL),
+(NULL, 'Turag', '1', '1', NULL),
+(NULL, 'Dakhinkhan', '1', '1', NULL),
+(NULL, 'Bangshal', '1', '1', NULL),
+(NULL, 'Bhashantek', '1', '1', NULL),
+(NULL, 'Bhatara', '1', '1', NULL),
+(NULL, 'Jatrabari', '1', '1', NULL),
+(NULL, 'Rampura', '1', '1', NULL),
+(NULL, 'Rupnagar', '1', '1', NULL),
+(NULL, 'Sherebangla', '1', '1', NULL),
+(NULL, 'Shahjahanpur', '1', '1', NULL),
+(NULL, 'Gazipur Sadar', '2', '1', NULL),
+(NULL, 'Kaliakair', '2', '1', NULL),
+(NULL, 'Kaliganj', '2', '1', NULL),
+(NULL, 'Kapasia', '2', '1', NULL),
+(NULL, 'Sreepur', '2', '1', NULL),
+(NULL, 'Gopalganj Sadar', '3', '1', NULL),
+(NULL, 'Kashiani', '3', '1', NULL),
+(NULL, 'Kotalipara', '3', '1', NULL),
+(NULL, 'Muksudpur', '3', '1', NULL),
+(NULL, 'Tungipara', '3', '1', NULL),
+(NULL, 'Austagram', '4', '1', NULL),
+(NULL, 'Bajitpur', '4', '1', NULL),
+(NULL, 'Bhairab', '4', '1', NULL),
+(NULL, 'Hossainpur', '4', '1', NULL),
+(NULL, 'Itna', '4', '1', NULL),
+(NULL, 'Karimganj', '4', '1', NULL),
+(NULL, 'Katiadi', '4', '1', NULL),
+(NULL, 'Kishoreganj Sadar', '4', '1', NULL),
+(NULL, 'Kuliarchar', '4', '1', NULL),
+(NULL, 'Mithamain', '4', '1', NULL),
+(NULL, 'Nikli', '4', '1', NULL),
+(NULL, 'Pakundia', '4', '1', NULL),
+(NULL, 'Tarail', '4', '1', NULL),
+(NULL, 'Rajoir', '5', '1', NULL),
+(NULL, 'Madaripur Sadar', '5', '1', NULL),
+(NULL, 'Kalkini', '5', '1', NULL),
+(NULL, 'Shibchar', '5', '1', NULL),
+(NULL, 'Dasar', '5', '1', NULL),
+(NULL, 'Daulatpur', '6', '1', NULL),
+(NULL, 'Ghior', '6', '1', NULL),
+(NULL, 'Harirampur', '6', '1', NULL),
+(NULL, 'Manikgonj Sadar', '6', '1', NULL),
+(NULL, 'Saturia', '6', '1', NULL),
+(NULL, 'Shivalaya', '6', '1', NULL),
+(NULL, 'Singair', '6', '1', NULL),
+(NULL, 'Gazaria', '7', '1', NULL),
+(NULL, 'Lohajang', '7', '1', NULL),
+(NULL, 'Munshiganj Sadar', '7', '1', NULL),
+(NULL, 'Sirajdikhan', '7', '1', NULL),
+(NULL, 'Sreenagar', '7', '1', NULL),
+(NULL, 'Tongibari', '7', '1', NULL),
+(NULL, 'Araihazar', '8', '1', NULL),
+(NULL, 'Bandar', '8', '1', NULL),
+(NULL, 'Narayanganj Sadar', '3', '1', NULL),
+(NULL, 'Rupganj', '8', '1', NULL),
+(NULL, 'Sonargaon', '8', '1', NULL),
+(NULL, 'Baliakandi', '9', '1', NULL),
+(NULL, 'Goalandaghat', '9', '1', NULL),
+(NULL, 'Pangsha', '9', '1', NULL),
+(NULL, 'Rajbari Sadar', '9', '1', NULL),
+(NULL, 'Kalukhali', '9', '1', NULL),
+(NULL, 'Bhedarganj', '10', '1', NULL),
+(NULL, 'Damudya', '10', '1', NULL),
+(NULL, 'Gosairhat', '10', '1', NULL),
+(NULL, 'Naria', '10', '1', NULL),
+(NULL, 'Shariatpur Sadar', '3', '1', NULL),
+(NULL, 'Zajira', '10', '1', NULL),
+(NULL, 'Shakhipur', '10', '1', NULL),
+(NULL, 'Alfadanga', '11', '1', NULL),
+(NULL, 'Bhanga', '11', '1', NULL),
+(NULL, 'Boalmari', '11', '1', NULL),
+(NULL, 'Charbhadrasan', '11', '1', NULL),
+(NULL, 'Faridpur Sadar', '11', '1', NULL),
+(NULL, 'Madhukhali', '11', '1', NULL),
+(NULL, 'Nagarkanda', '11', '1', NULL),
+(NULL, 'Sadarpur', '11', '1', NULL),
+(NULL, 'Saltha', '11', '1', NULL),
+(NULL, 'Gopalpur', '12', '1', NULL),
+(NULL, 'Basail', '12', '1', NULL),
+(NULL, 'Bhuapur', '12', '1', NULL),
+(NULL, 'Delduar', '12', '1', NULL),
+(NULL, 'Ghatail', '12', '1', NULL),
+(NULL, 'Kalihati', '12', '1', NULL),
+(NULL, 'Madhupur', '12', '1', NULL),
+(NULL, 'Mirzapur', '12', '1', NULL),
+(NULL, 'Nagarpur', '12', '1', NULL),
+(NULL, 'Sakhipur', '12', '1', NULL),
+(NULL, 'Dhanbari', '12', '1', NULL),
+(NULL, 'Tangail Sadar', '12', '1', NULL),
+(NULL, 'Narsingdi Sadar', '13', '1', NULL),
+(NULL, 'Belabo', '13', '1', NULL),
+(NULL, 'Monohardi', '13', '1', NULL),
+(NULL, 'Palash', '13', '1', NULL),
+(NULL, 'Raipura', '13', '1', NULL),
+(NULL, 'Shibpur', '13', '1', NULL),
+(NULL, 'Ali Kadam', '14', '2', NULL),
+(NULL, 'Bandarban Sadar', '14', '2', NULL),
+(NULL, 'Lama', '14', '2', NULL),
+(NULL, 'Naikhongchhari', '14', '2', NULL),
+(NULL, 'Rowangchhari', '14', '2', NULL),
+(NULL, 'Ruma', '14', '2', NULL),
+(NULL, 'Thanchi', '14', '2', NULL),
+(NULL, 'Akhaura', '15', '2', NULL),
+(NULL, 'Bancharampur', '15', '2', NULL),
+(NULL, 'Brahmanbaria Sadar', '15', '2', NULL),
+(NULL, 'Kasba', '15', '2', NULL),
+(NULL, 'Nabinagar', '15', '2', NULL),
+(NULL, 'Nasirnagar', '15', '2', NULL),
+(NULL, 'Sarail', '15', '2', NULL),
+(NULL, 'Ashuganj', '15', '2', NULL),
+(NULL, 'Bijoynagar', '15', '2', NULL),
+(NULL, 'Chandpur Sadar', '16', '2', NULL),
+(NULL, 'Faridganj', '16', '2', NULL),
+(NULL, 'Haimchar', '16', '2', NULL),
+(NULL, 'Haziganj', '16', '2', NULL),
+(NULL, 'Kachua', '16', '2', NULL),
+(NULL, 'Matlab Dakshin', '16', '2', NULL),
+(NULL, 'Matlab Uttar', '16', '2', NULL),
+(NULL, 'Shahrasti', '16', '2', NULL),
+(NULL, 'Anwara', '17', '2', NULL),
+(NULL, 'Banshkhali', '17', '2', NULL),
+(NULL, 'Boalkhali', '17', '2', NULL),
+(NULL, 'Chandanaish', '17', '2', NULL),
+(NULL, 'Fatikchhari', '17', '2', NULL),
+(NULL, 'Hathazari', '17', '2', NULL),
+(NULL, 'Karnaphuli', '17', '2', NULL),
+(NULL, 'Lohagara', '17', '2', NULL),
+(NULL, 'Mirsharai', '17', '2', NULL),
+(NULL, 'Patiya', '17', '2', NULL),
+(NULL, 'Rangunia', '17', '2', NULL),
+(NULL, 'Raozan', '17', '2', NULL),
+(NULL, 'Sandwip', '17', '2', NULL),
+(NULL, 'Satkania', '17', '2', NULL),
+(NULL, 'Sitakunda', '17', '2', NULL),
+(NULL, 'Barura', '18', '2', NULL),
+(NULL, 'Brahmanpara', '18', '2', NULL),
+(NULL, 'Burichang', '18', '2', NULL),
+(NULL, 'Chandina', '18', '2', NULL),
+(NULL, 'Chauddagram', '18', '2', NULL),
+(NULL, 'Daudkandi', '18', '2', NULL),
+(NULL, 'Debidwar', '18', '2', NULL),
+(NULL, 'Homna', '18', '2', NULL),
+(NULL, 'Laksam', '18', '2', NULL),
+(NULL, 'Lalmai', '18', '2', NULL),
+(NULL, 'Muradnagar', '18', '2', NULL),
+(NULL, 'Nangalkot', '18', '2', NULL),
+(NULL, 'Cumilla Adarsha Sadar', '18', '2', NULL),
+(NULL, 'Meghna', '18', '2', NULL),
+(NULL, 'Titas', '18', '2', NULL),
+(NULL, 'Monohargonj', '18', '2', NULL),
+(NULL, 'Cumilla Sadar Dakshi', '18', '2', NULL),
+(NULL, 'Chakaria', '19', '2', NULL),
+(NULL, 'Cox\'s Bazar Sadar', '19', '2', NULL),
+(NULL, 'Kutubdia', '19', '2', NULL),
+(NULL, 'Maheshkhali', '19', '2', NULL),
+(NULL, 'Ramu', '19', '2', NULL),
+(NULL, 'Teknaf', '19', '2', NULL),
+(NULL, 'Ukhia', '19', '2', NULL),
+(NULL, 'Pekua', '19', '2', NULL),
+(NULL, 'Eidgaon', '19', '2', NULL),
+(NULL, 'Chhagalnaiya', '20', '2', NULL),
+(NULL, 'Daganbhuiyan', '20', '2', NULL),
+(NULL, 'Feni Sadar', '20', '2', NULL),
+(NULL, 'Parshuram', '20', '2', NULL),
+(NULL, 'Sonagazi', '20', '2', NULL),
+(NULL, 'Fulgazi', '20', '2', NULL),
+(NULL, 'Dighinala', '21', '2', NULL),
+(NULL, 'Khagrachhari', '21', '2', NULL),
+(NULL, 'Lakshmichhari', '21', '2', NULL),
+(NULL, 'Mahalchhari', '21', '2', NULL),
+(NULL, 'Manikchhari', '21', '2', NULL),
+(NULL, 'Matiranga', '21', '2', NULL),
+(NULL, 'Panchhari ', '21', '2', NULL),
+(NULL, 'Ramgarh ', '21', '2', NULL),
+(NULL, 'Lakshmipur Sadar ', '22', '2', NULL),
+(NULL, 'Raipur', '22', '2', NULL),
+(NULL, 'Ramganj', '22', '2', NULL),
+(NULL, 'Ramgati', '22', '2', NULL),
+(NULL, 'Kamalnagar', '22', '2', NULL),
+(NULL, 'Begumganj', '23', '2', NULL),
+(NULL, 'Noakhali Sadar', '23', '2', NULL),
+(NULL, 'Chatkhil', '23', '2', NULL),
+(NULL, 'Companiganj', '23', '2', NULL),
+(NULL, 'Hatiya', '23', '2', NULL),
+(NULL, 'Senbagh', '23', '2', NULL),
+(NULL, 'Sonaimuri', '23', '2', NULL),
+(NULL, 'Kabirhat', '23', '2', NULL),
+(NULL, 'Bagaichhari', '24', '2', NULL),
+(NULL, 'Barkal', '24', '2', NULL),
+(NULL, 'Kawkhali (Betbunia)', '24', '2', NULL),
+(NULL, 'Belaichhari', '24', '2', NULL),
+(NULL, 'Kaptai', '24', '2', NULL),
+(NULL, 'Juraichhari', '24', '2', NULL),
+(NULL, 'Langadu', '24', '2', NULL),
+(NULL, 'Naniyachar', '24', '2', NULL),
+(NULL, 'Rajasthali', '24', '2', NULL),
+(NULL, 'Rangamati Sadar', '24', '2', NULL),
+(NULL, 'Amtali', '25', '3', NULL),
+(NULL, 'Bamna', '25', '3', NULL),
+(NULL, 'Barguna Sadar', '25', '3', NULL),
+(NULL, 'Betagi', '25', '3', NULL),
+(NULL, 'Patharghata', '25', '3', NULL),
+(NULL, 'Taltali', '25', '3', NULL),
+(NULL, 'Agailjhara', '26', '3', NULL),
+(NULL, 'Babuganj', '26', '3', NULL),
+(NULL, 'Bakerganj', '26', '3', NULL),
+(NULL, 'Banaripara', '26', '3', NULL),
+(NULL, 'Gaurnadi', '26', '3', NULL),
+(NULL, 'Hizla', '26', '3', NULL),
+(NULL, 'Barishal Sadar', '26', '3', NULL),
+(NULL, 'Mehendiganj', '26', '3', NULL),
+(NULL, 'Muladi', '26', '3', NULL),
+(NULL, 'Wazirpur', '26', '3', NULL),
+(NULL, 'Bhola Sadar', '27', '3', NULL),
+(NULL, 'Burhanuddin', '27', '3', NULL),
+(NULL, 'Char Fasson', '27', '3', NULL),
+(NULL, 'Daulatkhan', '27', '3', NULL),
+(NULL, 'Lalmohan', '27', '3', NULL),
+(NULL, 'Manpura', '27', '3', NULL),
+(NULL, 'Tazumuddin', '27', '3', NULL),
+(NULL, 'Jhalokati Sadar', '28', '3', NULL),
+(NULL, 'Kathalia', '28', '3', NULL),
+(NULL, 'Nalchity', '28', '3', NULL),
+(NULL, 'Rajapur', '28', '3', NULL),
+(NULL, 'Bauphal', '29', '3', NULL),
+(NULL, 'Dashmina', '29', '3', NULL),
+(NULL, 'Galachipa', '29', '3', NULL),
+(NULL, 'Kalapara', '29', '3', NULL),
+(NULL, 'Mirzaganj', '29', '3', NULL),
+(NULL, 'Patuakhali Sadar', '29', '3', NULL),
+(NULL, 'Rangabali', '29', '3', NULL),
+(NULL, 'Dumki', '29', '3', NULL),
+(NULL, 'Bhandaria', '30', '3', NULL),
+(NULL, 'Kawkhali', '30', '3', NULL),
+(NULL, 'Mathbaria', '30', '3', NULL),
+(NULL, 'Nazirpur', '30', '3', NULL),
+(NULL, 'Pirojpur Sadar', '30', '3', NULL),
+(NULL, 'Nesarabad (Swarupkati)', '30', '3', NULL),
+(NULL, 'Indurkani', '30', '3', NULL),
+(NULL, 'Bagerhat Sadar', '31', '4', NULL),
+(NULL, 'Chitalmari', '31', '4', NULL),
+(NULL, 'Fakirhat', '31', '4', NULL),
+(NULL, 'Kachua', '31', '4', NULL),
+(NULL, 'Mollahat', '31', '4', NULL),
+(NULL, 'Mongla', '31', '4', NULL),
+(NULL, 'Morrelganj', '31', '4', NULL),
+(NULL, 'Rampal', '31', '4', NULL),
+(NULL, 'Sarankhola', '31', '4', NULL),
+(NULL, 'Alamdanga', '32', '4', NULL),
+(NULL, 'Chuadanga Sadar', '32', '4', NULL),
+(NULL, 'Damurhuda', '32', '4', NULL),
+(NULL, 'Jibannagar', '32', '4', NULL),
+(NULL, 'Abhaynagar', '33', '4', NULL),
+(NULL, 'Bagherpara', '33', '4', NULL),
+(NULL, 'Chaugachha', '33', '4', NULL),
+(NULL, 'Jhikargachha', '33', '4', NULL),
+(NULL, 'Keshabpur', '33', '4', NULL),
+(NULL, 'Jashore Sadar', '33', '4', NULL),
+(NULL, 'Manirampur', '33', '4', NULL),
+(NULL, 'Sharsha', '33', '4', NULL),
+(NULL, 'Harinakunda', '34', '4', NULL),
+(NULL, 'Jhenaidah Sadar', '34', '4', NULL),
+(NULL, 'Kaliganj', '34', '4', NULL),
+(NULL, 'Kotchandpur', '34', '4', NULL),
+(NULL, 'Maheshpur', '34', '4', NULL),
+(NULL, 'Shailkupa', '34', '4', NULL),
+(NULL, 'Batiaghata', '35', '4', NULL),
+(NULL, 'Dacope', '35', '4', NULL),
+(NULL, 'Dumuria', '35', '4', NULL),
+(NULL, 'Dighalia', '35', '4', NULL),
+(NULL, 'Koyra', '35', '4', NULL),
+(NULL, 'Paikgachha', '35', '4', NULL),
+(NULL, 'Phultala', '35', '4', NULL),
+(NULL, 'Rupsha', '35', '4', NULL),
+(NULL, 'Terokhada', '35', '4', NULL),
+(NULL, 'Bheramara', '36', '4', NULL),
+(NULL, 'Daulatpur', '36', '4', NULL),
+(NULL, 'Khoksa', '36', '4', NULL),
+(NULL, 'Kumarkhali', '36', '4', NULL),
+(NULL, 'Kushtia Sadar', '36', '4', NULL),
+(NULL, 'Mirpur', '36', '4', NULL),
+(NULL, 'Magura Sadar', '37', '4', NULL),
+(NULL, 'Mohammadpur', '37', '4', NULL),
+(NULL, 'Shalikha', '37', '4', NULL),
+(NULL, 'Sreepur', '37', '4', NULL),
+(NULL, 'Gangni', '38', '4', NULL),
+(NULL, 'Meherpur Sadar', '38', '4', NULL),
+(NULL, 'Mujibnagar', '38', '4', NULL),
+(NULL, 'Kalia', '39', '4', NULL),
+(NULL, 'Lohagara', '39', '4', NULL),
+(NULL, 'Narail Sadar', '39', '4', NULL),
+(NULL, 'Naragati', '39', '4', NULL),
+(NULL, 'Assasuni', '40', '4', NULL),
+(NULL, 'Debhata', '40', '4', NULL),
+(NULL, 'Kalaroa', '40', '4', NULL),
+(NULL, 'Kaliganj', '40', '4', NULL),
+(NULL, 'Satkhira Sadar', '40', '4', NULL),
+(NULL, 'Shyamnagar', '40', '4', NULL),
+(NULL, 'Tala', '40', '4', NULL),
+(NULL, 'Adamdighi', '41', '5', NULL),
+(NULL, 'Bogura Sadar', '41', '5', NULL),
+(NULL, 'Dhunat', '41', '5', NULL),
+(NULL, 'Dhupchanchia', '41', '5', NULL),
+(NULL, 'Gabtali', '41', '5', NULL),
+(NULL, 'Kahaloo', '41', '5', NULL),
+(NULL, 'Nandigram', '41', '5', NULL),
+(NULL, 'Sariakandi', '41', '5', NULL),
+(NULL, 'Shajahanpur', '41', '5', NULL),
+(NULL, 'Sherpur', '41', '5', NULL),
+(NULL, 'Shibganj', '41', '5', NULL),
+(NULL, 'Sonatola', '41', '5', NULL),
+(NULL, 'Akkelpur', '42', '5', NULL),
+(NULL, 'Joypurhat Sadar', '42', '5', NULL),
+(NULL, 'Kalai', '42', '5', NULL),
+(NULL, 'Khetlal', '42', '5', NULL),
+(NULL, 'Panchbibi', '42', '5', NULL),
+(NULL, 'Atrai', '42', '5', NULL),
+(NULL, 'Badalgachhi', '42', '5', NULL),
+(NULL, 'Manda', '42', '5', NULL),
+(NULL, 'Dhamoirhat', '43', '5', NULL),
+(NULL, 'Mohadevpur', '43', '5', NULL),
+(NULL, 'Naogaon Sadar', '43', '5', NULL),
+(NULL, 'Niamatpur', '43', '5', NULL),
+(NULL, 'Patnitala', '43', '5', NULL),
+(NULL, 'Porsha', '43', '5', NULL),
+(NULL, 'Raninagar', '43', '5', NULL),
+(NULL, 'Sapahar', '43', '5', NULL),
+(NULL, 'Bagatipara', '44', '5', NULL),
+(NULL, 'Baraigram', '44', '5', NULL),
+(NULL, 'Gurudaspur', '44', '5', NULL),
+(NULL, 'Lalpur', '44', '5', NULL),
+(NULL, 'Natore Sadar', '44', '5', NULL),
+(NULL, 'Singra', '44', '5', NULL),
+(NULL, 'Naldanga', '44', '5', NULL),
+(NULL, 'Bholahat', '45', '5', NULL),
+(NULL, 'Gomastapur', '45', '5', NULL),
+(NULL, 'Nawabganj Sadar', '45', '5', NULL),
+(NULL, 'Shibganj', '45', '5', NULL),
+(NULL, 'Atgharia', '46', '5', NULL),
+(NULL, 'Bera', '46', '5', NULL),
+(NULL, 'Bhangura', '46', '5', NULL),
+(NULL, 'Chatmohar', '46', '5', NULL),
+(NULL, 'Faridpur', '46', '5', NULL),
+(NULL, 'Ishwardi', '46', '5', NULL),
+(NULL, 'Pabna Sadar', '46', '5', NULL),
+(NULL, 'Santhia', '46', '5', NULL),
+(NULL, 'Sujanagar', '46', '5', NULL),
+(NULL, 'Bagha', '47', '5', NULL),
+(NULL, 'Bagmara', '47', '5', NULL),
+(NULL, 'Charghat', '47', '5', NULL),
+(NULL, 'Durgapur', '47', '5', NULL),
+(NULL, 'Godagari', '47', '5', NULL),
+(NULL, 'Mohanpur', '47', '5', NULL),
+(NULL, 'Paba', '47', '5', NULL),
+(NULL, 'Puthia', '47', '5', NULL),
+(NULL, 'Tanore', '47', '5', NULL),
+(NULL, 'Belkuchi', '48', '5', NULL),
+(NULL, 'Chauhali', '48', '5', NULL),
+(NULL, 'Kamarkhanda', '48', '5', NULL),
+(NULL, 'Kazipur', '48', '5', NULL),
+(NULL, 'Raiganj', '48', '5', NULL),
+(NULL, 'Shahjadpur', '48', '5', NULL),
+(NULL, 'Sirajganj Sadar', '48', '5', NULL),
+(NULL, 'Tarash', '48', '5', NULL),
+(NULL, 'Ullahpara', '48', '5', NULL),
+(NULL, 'Ajmiriganj', '49', '6', NULL),
+(NULL, 'Bahubal', '49', '6', NULL),
+(NULL, 'Baniyachong', '49', '6', NULL),
+(NULL, 'Chunarughat', '49', '6', NULL),
+(NULL, 'Habiganj Sadar', '49', '6', NULL),
+(NULL, 'Lakhai', '49', '6', NULL),
+(NULL, 'Madhabpur', '49', '6', NULL),
+(NULL, 'Nabiganj', '49', '6', NULL),
+(NULL, 'Shayestaganj', '49', '6', NULL),
+(NULL, 'Barlekha', '50', '6', NULL),
+(NULL, 'Juri', '50', '6', NULL),
+(NULL, 'Kamalganj', '50', '6', NULL),
+(NULL, 'Kulaura', '50', '6', NULL),
+(NULL, 'Moulvibazar Sadar', '50', '6', NULL),
+(NULL, 'Rajnagar', '50', '6', NULL),
+(NULL, 'Sreemangal', '50', '6', NULL),
+(NULL, 'Bishwamvarpur', '51', '6', NULL),
+(NULL, 'Chhatak', '51', '6', NULL),
+(NULL, 'Shantiganj', '51', '6', NULL),
+(NULL, 'Derai', '51', '6', NULL),
+(NULL, 'Dharamapasha', '51', '6', NULL),
+(NULL, 'Dowarabazar', '51', '6', NULL),
+(NULL, 'Jagannathpur', '51', '6', NULL),
+(NULL, 'Jamalganj', '51', '6', NULL),
+(NULL, 'Sullah', '51', '6', NULL),
+(NULL, 'Sunamganj Sadar', '51', '6', NULL),
+(NULL, 'Tahirpur', '51', '6', NULL),
+(NULL, 'Modhyanagar', '51', '6', NULL),
+(NULL, 'Balaganj', '52', '6', NULL),
+(NULL, 'Beanibazar', '52', '6', NULL),
+(NULL, 'Bishwanath', '52', '6', NULL),
+(NULL, 'Companigonj', '52', '6', NULL),
+(NULL, 'Dakshin Surma', '52', '6', NULL),
+(NULL, 'Fenchuganj', '52', '6', NULL),
+(NULL, 'Golapganj', '52', '6', NULL),
+(NULL, 'Gowainghat', '52', '6', NULL),
+(NULL, 'Jaintiapur', '52', '6', NULL),
+(NULL, 'Kanaighat', '52', '6', NULL),
+(NULL, 'Osmani Nagar', '52', '6', NULL),
+(NULL, 'Sylhet Sadar', '52', '6', NULL),
+(NULL, 'Zakiganj', '52', '6', NULL),
+(NULL, 'Birampur', '53', '7', NULL),
+(NULL, 'Birganj', '53', '7', NULL),
+(NULL, 'Biral', '53', '7', NULL),
+(NULL, 'Bochaganj', '53', '7', NULL),
+(NULL, 'Chirirbandar', '53', '7', NULL),
+(NULL, 'Phulbari', '53', '7', NULL),
+(NULL, 'Ghoraghat', '53', '7', NULL),
+(NULL, 'Hakimpur', '53', '7', NULL),
+(NULL, 'Kaharole', '53', '7', NULL),
+(NULL, 'Khansama', '53', '7', NULL),
+(NULL, 'Dinajpur Sadar', '53', '7', NULL),
+(NULL, 'Nawabganj', '53', '7', NULL),
+(NULL, 'Parbatipur', '53', '7', NULL),
+(NULL, 'Phulchhari', '54', '7', NULL),
+(NULL, 'Gaibandha Sadar', '54', '7', NULL),
+(NULL, 'Gobindaganj', '54', '7', NULL),
+(NULL, 'Palashbari', '54', '7', NULL),
+(NULL, 'Sadullapur', '54', '7', NULL),
+(NULL, 'Sughatta', '54', '7', NULL),
+(NULL, 'Sundarganj', '54', '7', NULL),
+(NULL, 'Bhurungamari', '55', '7', NULL),
+(NULL, 'Char Rajibpur', '55', '7', NULL),
+(NULL, 'Chilmari', '55', '7', NULL),
+(NULL, 'Phulbari', '55', '7', NULL),
+(NULL, 'Kurigram Sadar', '55', '7', NULL),
+(NULL, 'Nageshwari', '55', '7', NULL),
+(NULL, 'Rajarhat', '55', '7', NULL),
+(NULL, 'Raomari', '55', '7', NULL),
+(NULL, 'Ulipur', '55', '7', NULL),
+(NULL, 'Aditmari', '56', '7', NULL),
+(NULL, 'Hatibandha', '56', '7', NULL),
+(NULL, 'Kaliganj', '56', '7', NULL),
+(NULL, 'Lalmonirhat Sadar', '56', '7', NULL),
+(NULL, 'Patgram ', '56', '7', NULL),
+(NULL, 'Dimla', '57', '7', NULL),
+(NULL, 'Domar', '57', '7', NULL),
+(NULL, 'Jaldhaka', '57', '7', NULL),
+(NULL, 'Kishoreganj', '57', '7', NULL),
+(NULL, 'Nilphamari Sadar', '57', '7', NULL),
+(NULL, 'Saidpur', '57', '7', NULL),
+(NULL, 'Atwari', '58', '7', NULL),
+(NULL, 'Boda', '58', '7', NULL),
+(NULL, 'Debiganj', '58', '7', NULL),
+(NULL, 'Panchagarh Sadar', '58', '7', NULL),
+(NULL, 'Tetulia', '58', '7', NULL),
+(NULL, 'Badarganj', '59', '7', NULL),
+(NULL, 'Gangachhara', '59', '7', NULL),
+(NULL, 'Kaunia', '59', '7', NULL),
+(NULL, 'Rangpur Sadar', '59', '7', NULL),
+(NULL, 'Mithapukur', '59', '7', NULL),
+(NULL, 'Pirgachha', '59', '7', NULL),
+(NULL, 'Pirganj', '59', '7', NULL),
+(NULL, 'Taraganj', '59', '7', NULL),
+(NULL, 'Baliadangi', '60', '7', NULL),
+(NULL, 'Haripur', '60', '7', NULL),
+(NULL, 'Pirganj', '60', '7', NULL),
+(NULL, 'Ranisankail', '60', '7', NULL),
+(NULL, 'Thakurgaon Sadar', '60', '7', NULL),
+(NULL, 'Baksiganj', '61', '8', NULL),
+(NULL, 'Dewanganj', '61', '8', NULL),
+(NULL, 'Islampur', '61', '8', NULL),
+(NULL, 'Jamalpur Sadar', '61', '8', NULL),
+(NULL, 'Madarganj', '61', '8', NULL),
+(NULL, 'Melandaha', '61', '8', NULL),
+(NULL, 'Sarishabari', '61', '8', NULL),
+(NULL, 'Trishal', '62', '8', NULL),
+(NULL, 'Dhobaura', '62', '8', NULL),
+(NULL, 'Fulbaria', '62', '8', NULL),
+(NULL, 'Gafargaon', '62', '8', NULL),
+(NULL, 'Gauripur', '62', '8', NULL),
+(NULL, 'Haluaghat', '62', '8', NULL),
+(NULL, 'Ishwarganj', '62', '8', NULL),
+(NULL, 'Mymensingh Sadar', '62', '8', NULL),
+(NULL, 'Muktagachha', '62', '8', NULL),
+(NULL, 'Nandail', '62', '8', NULL),
+(NULL, 'Phulpur', '62', '8', NULL),
+(NULL, 'Bhaluka', '62', '8', NULL),
+(NULL, 'Tara Khanda', '62', '8', NULL),
+(NULL, 'Atpara', '63', '8', NULL),
+(NULL, 'Barhatta', '63', '8', NULL),
+(NULL, 'Durgapur', '63', '8', NULL),
+(NULL, 'Khaliajuri', '63', '8', NULL),
+(NULL, 'Kalmakanda', '63', '8', NULL),
+(NULL, 'Kendua', '63', '8', NULL),
+(NULL, 'Madan', '63', '8', NULL),
+(NULL, 'Mohanganj', '63', '8', NULL),
+(NULL, 'Netrokona Sadar', '63', '8', NULL),
+(NULL, 'Purbadhala', '63', '8', NULL),
+(NULL, 'Jhenaigati', '64', '8', NULL),
+(NULL, 'Nakla', '64', '8', NULL),
+(NULL, 'Nalitabari', '64', '8', NULL),
+(NULL, 'Sherpur Sadar', '64', '8', NULL),
+(NULL, 'Sreebardi', '64', '8', NULL);
+
+
+
+
+
+
+
+--
+-- Dumping data for table author
+--
+
+INSERT INTO `author` (`id`, `name`, `created`) VALUES
+(NULL,'Humayun Ahmed',NULL),
+(NULL,'Kazi Nazrul Islam',NULL),
+(NULL,'Rabindranath Tagore',NULL),
+(NULL,'Sukanto Bhattacharjo',NULL),
+(NULL,'Abdul Hakim',NULL),
+(NULL,'Abu Ishaque',NULL),
+(NULL,'Abul Mansur Ahmed',NULL),
+(NULL,'Abdullah Abu Sayeed',NULL),
+(NULL,'Abdush Shakoor',NULL),
+(NULL,'Abu Rushd',NULL),
+(NULL,'Abdur Rouf Choudhury',NULL),
+(NULL,'Abul Fazal',NULL),
+(NULL,'Abdul Mannan Syed',NULL),
+(NULL,'Akhteruzzaman Elias',NULL),
+(NULL,'Al Mahmud',NULL),
+(NULL,'Alaol',NULL),
+(NULL,'Alauddin Al-Azad',NULL),
+(NULL,'Anisul Hoque',NULL),
+(NULL,'Anwar Pasha',NULL),
+(NULL,'Aly Zaker',NULL),
+(NULL,'Ahsan Habib',NULL),
+(NULL,'Ahmed Sofa',NULL),
+(NULL,'Aroj Ali Matubbar',NULL),
+(NULL,'Asad Chowdhury',NULL),
+(NULL,'Bande Ali Mia',NULL),
+(NULL,'Begum Rokeya',NULL),
+(NULL,'Bipradash Barua',NULL),
+(NULL,'Dilwar Khan',NULL),
+(NULL,'Dilara Hashem',NULL),
+(NULL,'Farah Ghuznavi',NULL),
+(NULL,'Farrukh Ahmad',NULL),
+(NULL,'Golam Mostofa',NULL),
+(NULL,'Harun Ar Rashid',NULL),
+(NULL,'Humayun Azad',NULL),
+(NULL,'Hasan Azizul Huq',NULL),
+(NULL,'Hason Raja',NULL),
+(NULL,'Hasnat Abdul Hye',NULL),
+(NULL,'Humayun Kabir Dhali',NULL),
+(NULL,'Husne Ara Shahed',NULL),
+(NULL,'Imdadul Haq Milan',NULL),
+(NULL,'Ismail Hossain Siraji',NULL),
+(NULL,'Jahanara Imam',NULL),
+(NULL,'Jasimuddin',NULL),
+(NULL,'Shahid Mahmud Jangi',NULL),
+(NULL,'Kaberi Gain',NULL),
+(NULL,'Kabir Chowdhury',NULL),
+(NULL,'Kaykobad',NULL),
+(NULL,'K Anis Ahmed',NULL),
+(NULL,'Khondakar Ashraf Hossain',NULL),
+(NULL,'Mir Mosharraf Hossain',NULL),
+(NULL,'Moinul Ahsan Saber',NULL),
+(NULL,'Muhammad Asadullah Al-Ghalib',NULL),
+(NULL,'Mohammad Barkatullah',NULL),
+(NULL,'Mohammad Lutfur Rahman',NULL),
+(NULL,'Mokbula Manzoor',NULL),
+(NULL,'Mohammad Nurul Huda',NULL),
+(NULL,'MymeMuhammed Zafar Iqbalnsingh',NULL),
+(NULL,'Muhammad Mansuruddin',NULL),
+(NULL,'Muhammad Shahidullah',NULL),
+(NULL,'Munier Choudhury',NULL),
+(NULL,'M Sakhawat Hossain',NULL),
+(NULL,'Nurul Momen',NULL),
+(NULL,'Nirmalendu Goon',NULL),
+(NULL,'Neamat Imam',NULL),
+(NULL,'Nilima Ibrahim',NULL),
+(NULL,'Rahat Khan',NULL),
+(NULL,'Rashid Askari',NULL),
+(NULL,'Rashid Haider',NULL),
+(NULL,'Rashid Karim',NULL),
+(NULL,'Razia Khan',NULL),
+(NULL,'Rizia Rahman',NULL),
+(NULL,'Rudra Mohammad Shahidullah',NULL),
+(NULL,'Sadat Hossain',NULL),
+(NULL,'Selim Al Deen',NULL),
+(NULL,'Selina Hossain',NULL),
+(NULL,'Shaheen Akhtar',NULL),
+(NULL,'Shahidullah Kaiser',NULL),
+(NULL,'Shahidul Zahir',NULL),
+(NULL,'Shamsuddin Abul Kalam',NULL),
+(NULL,'Shamsur Rahman',NULL),
+(NULL,'Shawkat Ali',NULL),
+(NULL,'Shawkat Osman',NULL),
+(NULL,'Shazia Omar',NULL),
+(NULL,'Sufia Kamal',NULL),
+(NULL,'Sheikh Fazlul Karim',NULL),
+(NULL,'Syed Ali Ahsan',NULL),
+(NULL,'Syed Mujtaba Ali',NULL),
+(NULL,'Syed Shamsul Haque',NULL),
+(NULL,'Syed Waliullah',NULL),
+(NULL,'Saad Z Hossain',NULL),
+(NULL,'Tahmima Anam',NULL),
+(NULL,'Zahir Raihan',NULL);
+
+
+--
+-- Dumping data for table publications
+--
+
+INSERT INTO `publications` (`id`, `name`, `created`) VALUES
+(NULL,'Janani Publication',NULL),
+(NULL,'The Bookworm',NULL),
+(NULL,'SEAN Publication',NULL),
+(NULL,'Parma Publishers and Distributors',NULL),
+(NULL,'Nymphea Publication',NULL),
+(NULL,'Hakkani Publishers',NULL),
+(NULL,'Adorn Publication',NULL),
+(NULL,'Bangladesh Law Book Company',NULL),
+(NULL,'Guardian Publications',NULL),
+(NULL,'Tamralipi',NULL),
+(NULL,'Little Magazine Kobitay Jagoron',NULL),
+(NULL,'Prothoma',NULL),
+(NULL,'Tawheed Publications',NULL),
+(NULL,'Parash Publishers',NULL),
+(NULL,'Pathak Shamabesh Centre',NULL),
+(NULL,'Dipu Books and Publishers',NULL),
+(NULL,'Mowla Brothers',NULL),
+(NULL,'Seba Prokashoni',NULL),
+(NULL,'Kathprokash',NULL),
+(NULL,'Liton Publication',NULL),
+(NULL,'Al Fatah Publications',NULL),
+(NULL,'Banglayan',NULL),
+(NULL,'Ahsan Publication',NULL),
+(NULL,'Bangla Book',NULL),
+(NULL,'Panjeree Publications Limited',NULL),
+(NULL,'Bangladesh Co-operative Book Society Ltd',NULL),
+(NULL,'Agamee Prakashani',NULL),
+(NULL,'Bud Comprint & Publications',NULL),
+(NULL,'Pendulum Publishers',NULL),
+(NULL,'Progoti Publisher',NULL),
+(NULL,'Muslim Village',NULL),
+(NULL,'Bangladesh Publisher & Booksellers Association',NULL),
+(NULL,'Pearl Publications',NULL),
+(NULL,'Shomoy Prokashon',NULL),
+(NULL,'Book House',NULL),
+(NULL,'Bengal Lights',NULL),
+(NULL,'Panjeree Publications Ltd.',NULL),
+(NULL,'Journeyman Books',NULL),
+(NULL,'Shaurov Publishers & Distributors',NULL),
+(NULL,'Friends Book Corner Publication office',NULL),
+(NULL,'A H Development Publishing House',NULL),
+(NULL,'Darussalam Publication',NULL),
+(NULL,'Kakoli Prokashoni',NULL),
+(NULL,'Shahitya Prakash',NULL),
+(NULL,'Maktabatul Islam',NULL),
+(NULL,'Publishers & Booksellers',NULL),
+(NULL,'The Bookworm',NULL),
+(NULL,'Worthy Publications',NULL),
+(NULL,'Boikhata.com.bd',NULL),
+(NULL,'Rabya Book House',NULL),
+(NULL,'Murdhonno Publication',NULL),
+(NULL,'Student Ways',NULL),
+(NULL,'Jupiter Publications',NULL),
+(NULL,'Banglabazar Book Market',NULL),
+(NULL,'Rodela Prokashoni',NULL),
+(NULL,'Panjeri Publication Ltd.',NULL),
+(NULL,'Nasib Publications',NULL),
+(NULL,'Afsar Brothers',NULL),
+(NULL,'Prothoma Prokashon',NULL),
+(NULL,'Jatiyo Sahitto Prokash',NULL),
+(NULL,'Annesha Prokashon',NULL),
+(NULL,'Papyrus',NULL),
+(NULL,'Shikha Prokashoni',NULL),
+(NULL,'Kobi Prokashoni',NULL),
+(NULL,'Universal Publications',NULL),
+(NULL,'Kabir Publications',NULL),
+(NULL,'Academia Publishing House Ltd',NULL),
+(NULL,'Lubdhak Prokashon Ltd.',NULL),
+(NULL,'Muktienterprise27gdec',NULL),
+(NULL,'Nobojug Prokashani',NULL),
+(NULL,'Modern Publications',NULL),
+(NULL,'Anannya Prokashoni',NULL),
+(NULL,'The Jamuna Publishers',NULL),
+(NULL,'Graphosman Publication',NULL),
+(NULL,'Jaitya Sahitya Prokashanee',NULL),
+(NULL,'Suchayani Publishers',NULL),
+(NULL,'Paragon Publishers',NULL),
+(NULL,'Ananda Book Supply-2',NULL),
+(NULL,'eBoighar',NULL),
+(NULL,'Jhinuk Prokashoni',NULL),
+(NULL,'Pillars Publications',NULL),
+(NULL,'Mashik Madina Publications',NULL),
+(NULL,'Anupam Prakashani',NULL),
+(NULL,'Academic Press and Publishers',NULL),
+(NULL,'Bishwa Bichitra',NULL),
+(NULL,'Oitijjo',NULL),
+(NULL,'Shaurov Publishers & Distributors',NULL),
+(NULL,'Md Jakir Hossain',NULL),
+(NULL,'Professor\'s Publications',NULL),
+(NULL,'Royal Publishers',NULL),
+(NULL,'Nilkhet Books Market',NULL),
+(NULL,'Gyangriha Prokashoni',NULL),
+(NULL,'Nawroze Sahitya Samvar',NULL),
+(NULL,'The Model Publishers',NULL),
+(NULL,'Gyankosh',NULL),
+(NULL,'Joy Publishers',NULL),
+(NULL,'Hemal Publications',NULL),
+(NULL,'Foysal Publishers',NULL),
+(NULL,'Jonaki Prokashoni',NULL),
+(NULL,'Utsho Prokashon',NULL),
+(NULL,'The University Press Limited',NULL),
+(NULL,'Paper Voyager Publications',NULL),
+(NULL,'Muhammad Brothers',NULL),
+(NULL,'Bishwa Kosh',NULL),
+(NULL,'Ahmed Publishing House',NULL),
+(NULL,'Omicon Publishing House',NULL),
+(NULL,'Cintasutro ',NULL),
+(NULL,'Rupok Book House',NULL),
+(NULL,'Rubi Enterprise',NULL),
+(NULL,'Boitaranga',NULL),
+(NULL,'Seagull Publications',NULL),
+(NULL,'Bangladesh Taj Company Ltd',NULL),
+(NULL,'Hasan Book Depot',NULL),
+(NULL,'Life Publishers',NULL),
+(NULL,'Mullick & Brothers',NULL),
+(NULL,'Nobel Publishing House',NULL),
+(NULL,'Panjery Publications Ltd.',NULL),
+(NULL,'Tamanna Book House',NULL),
+(NULL,'Gazi Prokashani',NULL),
+(NULL,'Bengal Boi',NULL),
+(NULL,'Progati Publishers',NULL),
+(NULL,'HAB International',NULL),
+(NULL,'Anindya Prokash',NULL),
+(NULL,'Bidhyalay Publications',NULL),
+(NULL,'Book Publication',NULL),
+(NULL,'Isabela.com.bd',NULL),
+(NULL,'BoiBazar.com',NULL),
+(NULL,'Book Point',NULL),
+(NULL,'Nilkhet Modern Library',NULL),
+(NULL,'Shova Prokash',NULL),
+(NULL,'Dhaka Comics Studios',NULL),
+(NULL,'Bright Publishers',NULL),
+(NULL,'Allied Book Center',NULL),
+(NULL,'The Bangladesh Book Corner',NULL),
+(NULL,'Bangladesh Islamic Centre',NULL),
+(NULL,'Redleaf Publishing',NULL),
+(NULL,'The University Press Limited',NULL),
+(NULL,'Joyotee',NULL);
+
+
+
+
+--
+-- Dumping data for table category
+--
+
+INSERT INTO `category` (`id`, `name`, `created`) VALUES
+(NULL,'Novels',NULL),
+(NULL,'Islamic Books',NULL),
+(NULL,'Academic',NULL),
+(NULL,'Adventure',NULL),
+(NULL,'Drama',NULL),
+(NULL,'Tragedy',NULL),
+(NULL,'Poetry',NULL),
+(NULL,'Science Fiction',NULL),
+(NULL,'Romantic',NULL),
+(NULL,'Horror',NULL),
+(NULL,'Histry',NULL),
+(NULL,'Business Studies',NULL),
+(NULL,'Magazine',NULL),
+(NULL,'General Knowledge',NULL),
+(NULL,'Sports',NULL),
+(NULL,'Health & Fitness',NULL),
+(NULL,'Journal',NULL),
+(NULL,'Travel',NULL),
+(NULL,'Philosophy',NULL),
+(NULL,'Cooking',NULL),
+(NULL,'Politics',NULL),
+(NULL,'Agriculture & Farmers',NULL),
+(NULL,'Computer, Freelancing and Programming',NULL);
+
+
+
+
+
+--
+-- Dumping data for table sub-category
+--
+
+
+INSERT INTO `subcategories` (`id`, `name`, `category_id`, `created`) VALUES
+(NULL, 'Contemporary Novels', 1, NULL),
+(NULL, 'Classical Novels', 1, NULL),
+(NULL, 'Romantic Novel', 1, NULL),
+(NULL, 'Political & Liberation War Based Novels', 1, NULL),
+(NULL, 'Children\'s Novels', 1, NULL),
+(NULL, 'Thriller & Adventure Novel', 1, NULL),
+(NULL, 'Historical Novel', 1, NULL),
+(NULL, 'Islamic Novelsy', 1, NULL),
+(NULL, 'Translated Novel', 1, NULL),
+(NULL, 'Novel Compilation & Whole', 1, NULL),
+(NULL, 'English Language Novels', 1, NULL),
+(NULL, 'Mystery & Detective Novels', 1, NULL),
+(NULL, 'Supernatural & Ghost Novels', 1, NULL),
+(NULL, 'Novels of West Bengal', 1, NULL),
+(NULL, 'Delightful Novel', 1, NULL),
+(NULL, 'Biographical Novels', 1, NULL),
+(NULL, 'Parapsychological Novels', 1, NULL),
+(NULL, 'Travel Novels', 1, NULL),
+(NULL, 'Quran & Tafsir', 2, NULL),
+(NULL, 'Hadith & Sunnah', 2, NULL),
+(NULL, 'Discussion on Quran', 2, NULL),
+(NULL, 'Discussion on Hadith', 2, NULL),
+(NULL, 'Rasul 6 in Sirat', 2, NULL),
+(NULL, 'Nabi-Rasul, Sahaba, Tabei & Oli-Awlia', 2, NULL),
+(NULL, 'Salat', 2, NULL),
+(NULL, 'Fasting', 2, NULL),
+(NULL, 'Hajj-Umrah & Sacrifice', 2, NULL),
+(NULL, 'Zakat', 2, NULL),
+(NULL, 'Islamic Territories, Governance & Politics', 2, NULL),
+(NULL, 'Arabic & Urdu', 2, NULL),
+(NULL, 'Death, The Hereafter & Paradise-Hell', 2, NULL),
+(NULL, 'Arabic Education', 2, NULL),
+(NULL, 'Islamic Law, Fatwa & Jurisprudence', 2, NULL),
+(NULL, 'Islamic Economy & Trade', 2, NULL),
+(NULL, 'Islamic Philosophy', 2, NULL),
+(NULL, 'Helper of Islamic Amal & Amal', 2, NULL),
+(NULL, 'Contemporary', 2, NULL),
+(NULL, 'Islamic Rules & Regulations',2, NULL),
+(NULL, 'The Context of Islam', 2, NULL),
+(NULL, 'Invitation, Preaching, Speech, Discussion & Waz', 2, NULL),
+(NULL, 'Personal & Family Life', 2, NULL),
+(NULL, 'Islamic Ideology & Doctrine', 2, NULL),
+(NULL, 'Spirituality & Sufism', 2, NULL),
+(NULL, 'Islamic history & Tradition', 2, NULL),
+(NULL, 'Islamic English Books', 2, NULL),
+(NULL, 'Islamic Books for Children & Teenagers', 2, NULL),
+(NULL, 'Islamic literature', 2, NULL),
+(NULL, 'Islamic & Sirat Encyclopedia', 2, NULL),
+(NULL, 'Islamic Studies (Textbook)', 2, NULL),
+(NULL, 'Muslim Personality', 2, NULL),
+(NULL, 'Doa, Darood & Zikr', 2, NULL),
+(NULL, 'Special Days & Events of Islam', 2, NULL),
+(NULL, 'Islamic Miscellaneous Books', 2, NULL),
+(NULL, 'Islamic Questions & Answers', 2, NULL),
+(NULL, 'Iman, Aqeedah & Tawbah', 2, NULL),
+(NULL, 'Women in Islam', 2, NULL),
+(NULL, 'Islamic Research, Criticism & Essays', 2, NULL),
+(NULL, 'Islamic Translation Books', 2, NULL),
+(NULL, 'Islam & The Contemporary World', 2, NULL),
+(NULL, 'Islam & Bangladesh', 2, NULL),
+(NULL, 'Islamic Architecture & Culture', 2, NULL),
+(NULL, 'Islam & Science', 2, NULL),
+(NULL, 'Islamic Books: Self-Development', 2, NULL),
+(NULL, 'Islamic Medicine & Hygiene', 2, NULL),
+(NULL, 'PSC', 3, NULL),
+(NULL, 'JSC', 3, NULL),
+(NULL, 'SSC', 3, NULL),
+(NULL, 'HSC', 3, NULL),
+(NULL, 'Graduate', 3, NULL),
+(NULL, 'Post Graduate', 3, NULL),
+(NULL, 'Mystery and Detective', 4, NULL),
+(NULL, 'Children Adventure', 4, NULL),
+(NULL, 'Supernatural', 4, NULL),
+(NULL, 'Thriller', 4, NULL),
+(NULL, 'Myths &Legends', 4, NULL),
+(NULL, 'Drama Criticism & Others', 5, NULL),
+(NULL, 'Translation: Drama Book', 5, NULL),
+(NULL, 'Tragedy', 6, NULL),
+(NULL, 'Shara', 7, NULL),
+(NULL, 'Poetry', 7, NULL),
+(NULL, 'Poetry Garden', 7, NULL),
+(NULL, 'Recitation & Art Techniques', 7, NULL),
+(NULL, 'Collection of Poems & The Whole', 7, NULL),
+(NULL, 'Science Fiction', 8, NULL),
+(NULL, 'Translation Science Fiction', 8, NULL),
+(NULL, 'Science Fiction Whole or Compilation', 8, NULL),
+(NULL, 'Historical Romance', 9, NULL),
+(NULL, 'Romantic Suspense', 9, NULL),
+(NULL, 'Inspirational Romance', 9, NULL),
+(NULL, 'Speculative Romance', 9, NULL),
+(NULL, 'Romantic', 9, NULL),
+(NULL, 'Horror', 10, NULL),
+(NULL, 'History of Ancient Civilization', 11, NULL),
+(NULL, 'History of The Indian Subcontinent', 11, NULL),
+(NULL, 'Asia', 11, NULL),
+(NULL, 'Europe', 11, NULL),
+(NULL, 'History of Africa', 11, NULL),
+(NULL, 'Muslim History', 11, NULL),
+(NULL, 'Asia', 11, NULL),
+(NULL, 'Stock Market', 12, NULL),
+(NULL, 'Economy', 12, NULL),
+(NULL, 'Banking & Finance', 12, NULL),
+(NULL, 'Accounting', 12, NULL),
+(NULL, 'Statistics', 12, NULL),
+(NULL, 'Banking Diploma', 12, NULL),
+(NULL, 'Business Laws & Regulations', 12, NULL),
+(NULL, 'Magazine', 13, NULL),
+(NULL, 'General Knowladge', 14, NULL),
+(NULL, 'Sports', 15, NULL),
+(NULL, 'Health & Fitness', 16, NULL),
+(NULL, 'Journal', 17, NULL),
+(NULL, 'Travel', 18, NULL),
+(NULL, 'Philosophy', 19, NULL),
+(NULL, 'Recipe', 20, NULL),
+(NULL, 'Miscellaneous Books on Cooking', 20, NULL),
+(NULL, 'Food & Nutrition', 20, NULL),
+(NULL, 'Governance', 21, NULL),
+(NULL, 'Revolution & Rebellion', 21, NULL),
+(NULL, 'Regionally', 21, NULL),
+(NULL, 'Theory & Philosophy', 21, NULL),
+(NULL, 'Political Conspiracies & Assassinations', 21, NULL),
+(NULL, 'International Politics', 21, NULL),
+(NULL, 'Cultivation of Crops & Vegetables', 22, NULL),
+(NULL, 'Gardening Flower & Fruit Cultivation', 22, NULL),
+(NULL, 'Cattle', 22, NULL),
+(NULL, 'Ducks, Chickens & Birds', 22, NULL),
+(NULL, 'Agricultural Technology & Economics', 22, NULL),
+(NULL, 'Fisheries', 22, NULL),
+(NULL, 'Agricultural Articles & Miscellaneous', 22, NULL),
+(NULL, 'Computer, Freelancing and Programming', 23, NULL),
+(NULL, 'Freelancing & Outsourcing', 23, NULL),
+(NULL, 'Computer, Computer Programming', 23, NULL),
+(NULL, 'Computer, Basic Computer', 23, NULL),
+(NULL, 'Computer hacking', 23, NULL),
+(NULL, 'Internet', 23, NULL),
+(NULL, 'Graphics Design & Multimedia', 23, NULL),
+(NULL, 'Web Design & Development', 23, NULL),
+(NULL, 'SEO', 23, NULL),
+(NULL, 'Software', 23, NULL),
+(NULL, 'Hardware and Troubleshooting', 23, NULL),
+(NULL, 'Computer Education for Children', 23, NULL),
+(NULL, 'Operating System', 23, NULL),
+(NULL, 'Networking', 23, NULL),
+(NULL, 'Management Information System', 23, NULL),
+(NULL, 'Articles & Research on IT', 23, NULL);
