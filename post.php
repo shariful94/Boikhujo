@@ -18,16 +18,7 @@ if (isset($_POST['add_product'])) {
     if($author == "-1"){ $error = true; $errormessage[] = "author name required!!";}
     $publications = isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";
     if($publications == "-1"){ $error = true; $errormessage[] = "publication name required!!";}
-/*     $details = isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : ""; $conn->escape_string($_POST['details']);
-    $price = isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : ""; $conn->escape_string($_POST['price']);
-    $category =isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";  $conn->escape_string($_POST['category']);
-    $subcategory =isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";  $conn->escape_string($_POST['subcategory']);
-    $division =isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";  $conn->escape_string($_POST['division']);
-    $district =isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";  $conn->escape_string($_POST['district']);
-    $area =isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";  $conn->escape_string($_POST['area']);
-    $condition = isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : ""; $conn->escape_string($_POST['condition']);
-    $checkout = isset($_POST['publications']) ? $conn->escape_string($_POST['publications']) : "";  $conn->escape_string($_POST['checkout']);
- */
+
     $images = $_FILES['images'];
     $images_name = $images['name'];
     $images_tmp = $images['tmp_name'];
