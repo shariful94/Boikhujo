@@ -82,7 +82,7 @@
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(23, 2, 82, 0.2)">
                 Devoloped By:
-                <a class="text-white text-decoration-none" href="#">Shariful, Zayed, Mohsin, Tamim & Tasnim</a>
+                <a class="text-white text-decoration-none" href="about_us.php">Shariful Islam</a>
             </div>
             <!-- Copyright -->
         </footer>
